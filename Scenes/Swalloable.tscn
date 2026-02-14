@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://ffw05b4xgacs"]
 
-[ext_resource type="Texture2D" uid="uid://cv3mvfpcskek3" path="res://icon.svg" id="1_kpueh"]
+[ext_resource type="Script" uid="uid://gknpdwgst0c1" path="res://Scripts/swalloable.gd" id="1_sjpbn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjpbn"]
-radius = 16.0
+radius = 17.0
 
 [node name="Swalloable" type="RigidBody2D" groups=["swalloable"]]
 gravity_scale = 0.0
+script = ExtResource("1_sjpbn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(162, 104)
 scale = Vector2(0.17968741, 0.18359374)
-texture = ExtResource("1_kpueh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(162, 105)

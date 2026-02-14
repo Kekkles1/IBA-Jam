@@ -16,9 +16,11 @@ scale = Vector2(1.2656248, 1.4218749)
 texture = ExtResource("2_6w688")
 
 [node name="SwallowArea" type="Area2D" parent="."]
+position = Vector2(275, 332)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwallowArea"]
-position = Vector2(275, 334)
+position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_snr8g")
 
 [connection signal="body_entered" from="SwallowArea" to="." method="_on_swallow_area_body_entered"]
+[connection signal="body_exited" from="SwallowArea" to="." method="_on_swallow_area_body_exited"]
