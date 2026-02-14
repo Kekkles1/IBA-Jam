@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv46w1wvr652b"]
+[gd_scene load_steps=5 format=3 uid="uid://cv46w1wvr652b"]
 
+[ext_resource type="Script" uid="uid://iycimmrpjwu2" path="res://Scenes/level1.gd" id="1_jghel"]
 [ext_resource type="PackedScene" uid="uid://8mv8tsf1od43" path="res://Scenes/Hole.tscn" id="1_q12u6"]
 [ext_resource type="PackedScene" uid="uid://ffw05b4xgacs" path="res://Scenes/Swalloable.tscn" id="2_joc8x"]
+[ext_resource type="PackedScene" uid="uid://bomulcvktdix6" path="res://Scenes/UI_HUD.tscn" id="3_joc8x"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_jghel")
 
 [node name="Hole" parent="." instance=ExtResource("1_q12u6")]
 
 [node name="Swalloable" parent="." instance=ExtResource("2_joc8x")]
 position = Vector2(258, 200)
+
+[node name="UI_HUD" parent="." instance=ExtResource("3_joc8x")]

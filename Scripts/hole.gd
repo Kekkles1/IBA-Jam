@@ -1,5 +1,7 @@
 extends Node2D
 
+signal swallowed
+
 @export var follow_speed := 18.0
 @export var hole_radius := 48.0  # match your CircleShape2D radius
 
@@ -14,15 +16,13 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 	if not body.is_in_group("swalloable"):
 		return
 
-	# simple "fit" check using collision bounds
 	if body is Node2D:
 		var size := 999999.0
 
-		# If it has a CollisionShape2D with a CircleShape2D
 		var cs := body.get_node_or_null("CollisionShape2D")
 		if cs and cs.shape is CircleShape2D:
-			size = (cs.shape as CircleShape2D).radius * body.scale.x
+			size = (cs.shape as CircleShape2D).radius * (body as Node2D).scale.x
 
-		# If it fits, swallow
 		if size <= hole_radius:
+			emit_signal("swallowed")
 			body.queue_free()
