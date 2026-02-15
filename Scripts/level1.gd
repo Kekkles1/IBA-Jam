@@ -2,11 +2,15 @@ extends Node2D
 
 @onready var hole: Node = $Hole
 @onready var hud: CanvasLayer = $UI_HUD
+@onready var bgm: AudioStreamPlayer = $BGM
 
 var total_size: float = 0.0
 var eaten_size: float = 0.0
 
 func _ready() -> void:
+	bgm.volume_db = -15   # tweak
+	bgm.play()
+	
 	await get_tree().process_frame
 
 	total_size = _sum_all_swallowable_radii(self)

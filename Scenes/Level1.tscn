@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://cv46w1wvr652b"]
+[gd_scene load_steps=24 format=4 uid="uid://cv46w1wvr652b"]
 
 [ext_resource type="Script" uid="uid://cmcwxp2wl4kpq" path="res://Scripts/level1.gd" id="1_jghel"]
 [ext_resource type="PackedScene" uid="uid://8mv8tsf1od43" path="res://Scenes/Hole.tscn" id="1_q12u6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://4fmmmc68r8pu" path="res://Assets/TileSet/kitchen_green.png" id="10_06um6"]
 [ext_resource type="Texture2D" uid="uid://7ekwf4ivhp6e" path="res://Assets/TileSet/kitchen_tan.png" id="11_ubfni"]
 [ext_resource type="Texture2D" uid="uid://bx0tckrn8x4ik" path="res://Assets/TileSet/kitchen_v1.png" id="12_ug0sv"]
+[ext_resource type="AudioStream" uid="uid://5bxa7xxaxcqa" path="res://Assets/Sounds/MainSong.wav" id="13_6jj8j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wsr5"]
 texture = ExtResource("8_rpty4")
@@ -1500,3 +1501,6 @@ collision_radius = 40.0
 
 [node name="Swalloable3" parent="." instance=ExtResource("2_joc8x")]
 level_texture = ExtResource("7_kylad")
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_6jj8j")

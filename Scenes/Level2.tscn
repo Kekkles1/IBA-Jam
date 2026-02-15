@@ -932,6 +932,7 @@ collision_radius = 30.0
 [node name="Swalloable3" parent="." instance=ExtResource("4_70df5")]
 position = Vector2(455, 9)
 level_texture = ExtResource("7_62f1r")
+collision_radius = 50.0
 
 [node name="Swalloable4" parent="." instance=ExtResource("4_70df5")]
 position = Vector2(223, 372)

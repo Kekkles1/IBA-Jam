@@ -15,6 +15,21 @@ signal swallowed(eaten_r: float)
 
 @onready var swallow_cs: CollisionShape2D = $SwallowArea/CollisionShape2D
 
+# SFX players (RejectSFX / TooBigSFX are optional)
+@onready var swallow_sfx: AudioStreamPlayer2D = $SwallowSFX
+@onready var reject_sfx: AudioStreamPlayer2D = get_node_or_null("RejectSFX") as AudioStreamPlayer2D
+@onready var too_big_sfx: AudioStreamPlayer2D = get_node_or_null("TooBigSFX") as AudioStreamPlayer2D
+
+func _ready() -> void:
+	if swallow_sfx:
+		swallow_sfx.volume_db = 15
+
+	if reject_sfx:
+		reject_sfx.volume_db = 6
+
+	if too_big_sfx:
+		too_big_sfx.volume_db = 3
+
 func _physics_process(delta: float) -> void:
 	# Collision-safe movement (TileMap can block CharacterBody2D)
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -44,6 +59,7 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 	var milk_val: Variant = body.get("contains_milk") # null if missing
 	if milk_val != null and bool(milk_val) and not can_swallow_milk:
 		print("lactose intolerant")
+		_play_sfx(reject_sfx, 0.95, 1.05)  # optional reject sound
 		return
 
 	# Get hole radius (circle radius * scale)
@@ -60,6 +76,9 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 
 	# Only swallow if body is smaller OR exact same size
 	if body_r <= hole_r:
+		# SFX: swallow (only when actually swallowed)
+		_play_sfx(swallow_sfx, 0.95, 1.10)
+
 		# IMPORTANT: emit eaten radius for size-based progress
 		swallowed.emit(body_r)
 		print("swallowed (r=", body_r, ")")
@@ -69,6 +88,18 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 		body_node.queue_free()
 	else:
 		print("tooo big")
+		_play_sfx(too_big_sfx, 0.90, 1.00) # optional "too big" sound
+
+func _play_sfx(player: AudioStreamPlayer2D, pitch_min: float, pitch_max: float) -> void:
+	if player == null:
+		return
+
+	# prevent machine-gun overlap
+	if player.playing:
+		player.stop()
+
+	player.pitch_scale = randf_range(pitch_min, pitch_max)
+	player.play()
 
 func _grow_after_swallow(eaten_r: float, hole_r: float) -> void:
 	# How "big" was the eaten object relative to the hole (0..1)
