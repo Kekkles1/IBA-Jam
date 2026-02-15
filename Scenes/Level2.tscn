@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://fl6sd0x811yp"]
+
+[ext_resource type="PackedScene" uid="uid://8mv8tsf1od43" path="res://Scenes/Hole.tscn" id="1_0plju"]
+[ext_resource type="Script" uid="uid://ddt4jgt3etcl6" path="res://Scripts/level2.gd" id="1_ms0wi"]
+[ext_resource type="PackedScene" uid="uid://bomulcvktdix6" path="res://Scenes/UI_HUD.tscn" id="2_ms0wi"]
+[ext_resource type="PackedScene" uid="uid://ffw05b4xgacs" path="res://Scenes/Swalloable.tscn" id="4_70df5"]
+[ext_resource type="Texture2D" uid="uid://irc3h4vu4lct" path="res://Assets/67_macncheese.png" id="5_ejprb"]
+[ext_resource type="Texture2D" uid="uid://ehab6j4gqyjg" path="res://Assets/69_meatball.png" id="6_au75x"]
+[ext_resource type="Texture2D" uid="uid://bmwwu0yg5yutb" path="res://Assets/45_frenchfries_dish.png" id="7_62f1r"]
+[ext_resource type="Texture2D" uid="uid://dfu2q37n1h1xl" path="res://Assets/23_cheesecake_dish.png" id="8_1je60"]
+[ext_resource type="Texture2D" uid="uid://dwhwwg86rpcoa" path="res://Assets/59_jelly.png" id="9_ycmr1"]
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_ms0wi")
+
+[node name="Hole" parent="." instance=ExtResource("1_0plju")]
+
+[node name="UI_HUD" parent="." instance=ExtResource("2_ms0wi")]
+
+[node name="Swalloable" parent="." instance=ExtResource("4_70df5")]
+contains_milk = true
+level_texture = ExtResource("5_ejprb")
+collision_radius = 35.0
+
+[node name="Swalloable2" parent="." instance=ExtResource("4_70df5")]
+position = Vector2(521, 248)
+level_texture = ExtResource("6_au75x")
+collision_radius = 30.0
+
+[node name="Swalloable3" parent="." instance=ExtResource("4_70df5")]
+position = Vector2(455, 9)
+level_texture = ExtResource("7_62f1r")
+
+[node name="Swalloable4" parent="." instance=ExtResource("4_70df5")]
+position = Vector2(223, 372)
+contains_milk = true
+level_texture = ExtResource("8_1je60")
+collision_radius = 30.0
+
+[node name="Swalloable5" parent="." instance=ExtResource("4_70df5")]
+position = Vector2(-48, 237)
+level_texture = ExtResource("9_ycmr1")
+collision_radius = 45.0

@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1w3h466h7eo4"]
+
+[ext_resource type="PackedScene" uid="uid://dcfduohbarevo" path="res://Scenes/Hole_Level3.tscn" id="1_kg31f"]
+[ext_resource type="PackedScene" uid="uid://bomulcvktdix6" path="res://Scenes/UI_HUD.tscn" id="2_ncjpd"]
+[ext_resource type="PackedScene" uid="uid://ffw05b4xgacs" path="res://Scenes/Swalloable.tscn" id="3_ffsx8"]
+[ext_resource type="Texture2D" uid="uid://bx01xkensbiuo" path="res://Assets/96_steak_dish.png" id="4_dl4b5"]
+[ext_resource type="Texture2D" uid="uid://cyjrih0euiru2" path="res://Assets/13_bacon.png" id="5_t5kwq"]
+[ext_resource type="Texture2D" uid="uid://cm3pomojikh0b" path="res://Assets/05_apple_pie.png" id="6_ms3ee"]
+[ext_resource type="Texture2D" uid="uid://dj53vvu3ehu12" path="res://Assets/75_pudding.png" id="7_ktnig"]
+[ext_resource type="Texture2D" uid="uid://cqyq7k3ko1eb2" path="res://Assets/55_hotdog_sauce.png" id="8_nfsas"]
+[ext_resource type="Texture2D" uid="uid://dm3a8t14iu77" path="res://Assets/16_burger_dish.png" id="9_xxw0v"]
+[ext_resource type="Texture2D" uid="uid://dqgiwno2r8op3" path="res://Assets/85_roastedchicken.png" id="10_5pcch"]
+[ext_resource type="Texture2D" uid="uid://hn8uw0j0iu56" path="res://Assets/50_giantgummybear.png" id="11_85b6l"]
+
+[node name="Level3" type="Node2D"]
+
+[node name="Hole" parent="." instance=ExtResource("1_kg31f")]
+
+[node name="UI_HUD" parent="." instance=ExtResource("2_ncjpd")]
+
+[node name="Swalloable" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(-56, 310)
+is_savory = true
+level_texture = ExtResource("4_dl4b5")
+collision_radius = 40.0
+
+[node name="Swalloable2" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(-103, 104)
+is_savory = true
+level_texture = ExtResource("5_t5kwq")
+collision_radius = 30.0
+
+[node name="Swalloable3" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(-88, -73)
+level_texture = ExtResource("6_ms3ee")
+collision_radius = 25.0
+
+[node name="Swalloable4" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(60, 122)
+contains_milk = true
+level_texture = ExtResource("7_ktnig")
+collision_radius = 60.0
+
+[node name="Swalloable5" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(178, -30)
+is_savory = true
+level_texture = ExtResource("8_nfsas")
+collision_radius = 55.0
+
+[node name="Swalloable6" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(575, 294)
+contains_milk = true
+level_texture = ExtResource("9_xxw0v")
+collision_radius = 58.0
+
+[node name="Swalloable7" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(646, 72)
+is_savory = true
+level_texture = ExtResource("10_5pcch")
+collision_radius = 55.0
+
+[node name="Swalloable8" parent="." instance=ExtResource("3_ffsx8")]
+position = Vector2(552, -19)
+level_texture = ExtResource("11_85b6l")
+collision_radius = 59.0

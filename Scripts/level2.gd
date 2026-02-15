@@ -1,35 +1,36 @@
 extends Node2D
 
 @onready var hole: Node = $Hole
-@onready var hud: CanvasLayer = $UI_HUD
+@onready var hud: CanvasLayer = $UI_HUD   # <-- change to $UI_HUD if that's your node name
 
-var total_size: float = 0.0
-var eaten_size: float = 0.0
+var total_safe_size: float = 0.0
+var eaten_safe_size: float = 0.0
 
 func _ready() -> void:
 	await get_tree().process_frame
 
-	total_size = _sum_all_swallowable_radii(self)
-	eaten_size = 0.0
+	total_safe_size = _sum_safe_sizes(self)
+	eaten_safe_size = 0.0
 
-	print("TOTAL SIZE:", total_size)
+	print("TOTAL SAFE SIZE:", total_safe_size)
 
 	hud.set_progress01(0.0)
 
-	# NOTE: now the signal sends eaten_r (float)
+	# hole emits swallowed(eaten_r: float)
 	hole.swallowed.connect(_on_hole_swallowed)
 
 	hud.time_up.connect(_on_time_up)
 
 func _on_hole_swallowed(eaten_r: float) -> void:
-	eaten_size += eaten_r
+	# milk items won't reach here because hole blocks them
+	eaten_safe_size += eaten_r
 
 	var p := 0.0
-	if total_size > 0.0:
-		p = eaten_size / total_size
+	if total_safe_size > 0.0:
+		p = eaten_safe_size / total_safe_size
 
 	hud.set_progress01(p)
-	print("eaten_r=", eaten_r, " eaten_size=", eaten_size, " p=", p)
+	print("eaten_r=", eaten_r, " eaten_safe_size=", eaten_safe_size, " p=", p)
 
 	if p >= 1.0:
 		_on_progress_full()
@@ -40,21 +41,27 @@ func _on_time_up() -> void:
 func _on_progress_full() -> void:
 	print("LEVEL COMPLETE")
 
-# ---- helpers ----
+# -----------------------
+# Helpers (safe items only)
+# -----------------------
 
-func _sum_all_swallowable_radii(node: Node) -> float:
+func _sum_safe_sizes(node: Node) -> float:
 	var sum := 0.0
 
-	# only count swallowables in THIS level tree
-	if node.is_in_group("swalloable"):
+	if node.is_in_group("swalloable") and _is_safe(node):
 		var r := _get_circle_radius_from_node(node)
 		if r > 0.0:
 			sum += r
 
 	for child in node.get_children():
-		sum += _sum_all_swallowable_radii(child)
+		sum += _sum_safe_sizes(child)
 
 	return sum
+
+func _is_safe(n: Node) -> bool:
+	var milk_val: Variant = n.get("contains_milk") # null if missing
+	var has_milk := (milk_val != null and bool(milk_val))
+	return not has_milk
 
 func _get_circle_radius_from_node(n: Node) -> float:
 	if not (n is Node2D):

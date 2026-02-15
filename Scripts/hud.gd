@@ -16,8 +16,9 @@ func _ready() -> void:
 
 	# progress defaults
 	progress_bar.min_value = 0.0
-	progress_bar.max_value = 1.0
+	progress_bar.max_value = 100.0
 	progress_bar.value = 0.0
+
 
 func _process(delta: float) -> void:
 	if time_left <= 0.0:
@@ -46,9 +47,12 @@ func reset_timer(new_seconds: float = -1.0) -> void:
 
 # If you want to set progress as 0..1 (percent)
 func set_progress01(p: float) -> void:
+	p = clamp(p, 0.0, 1.0)
+
 	progress_bar.min_value = 0.0
-	progress_bar.max_value = 1.0
-	progress_bar.value = clamp(p, 0.0, 1.0)
+	progress_bar.max_value = 100.0
+	progress_bar.value = p * 100.0
+
 
 # If you want "current out of total" (e.g., swallowed / total)
 func set_progress(current: float, total: float) -> void:

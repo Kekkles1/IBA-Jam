@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 @export var contains_milk: bool = false
+@export var is_savory: bool = false
 @export var level_texture: Texture2D
 
 @export var collision_radius: float = 24.0
