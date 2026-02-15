@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=4 uid="uid://d1w3h466h7eo4"]
 
-[ext_resource type="PackedScene" uid="uid://dcfduohbarevo" path="res://Scenes/Hole_Level3.tscn" id="1_kg31f"]
-[ext_resource type="Script" uid="uid://bfgodfvvbnvxs" path="res://Scripts/level3.gd" id="1_ncjpd"]
+[ext_resource type="Script" uid="uid://uml0cxmkoq16" path="res://Scripts/level3.gd" id="1_ncjpd"]
 [ext_resource type="Texture2D" uid="uid://bx0tckrn8x4ik" path="res://Assets/TileSet/kitchen_v1.png" id="2_ffsx8"]
 [ext_resource type="PackedScene" uid="uid://bomulcvktdix6" path="res://Scenes/UI_HUD.tscn" id="2_ncjpd"]
+[ext_resource type="PackedScene" uid="uid://cblfdgg3uepey" path="res://Scenes/HoleForLvl3.tscn" id="3_dl4b5"]
 [ext_resource type="PackedScene" uid="uid://ffw05b4xgacs" path="res://Scenes/Swalloable.tscn" id="3_ffsx8"]
 [ext_resource type="Texture2D" uid="uid://bx01xkensbiuo" path="res://Assets/96_steak_dish.png" id="4_dl4b5"]
 [ext_resource type="Texture2D" uid="uid://cyjrih0euiru2" path="res://Assets/13_bacon.png" id="5_t5kwq"]
@@ -919,8 +919,8 @@ tile_set = SubResource("TileSet_ktnig")
 tile_map_data = PackedByteArray("AAAUAAAAAAANAAAAAAAaAAAAAAAEAA0AAAAXAAAAAAACAA0AAAAAAAYAAAAEAA0AAFAKAA0AAAAEAA0AAFANAA0AAAADAA0AADA=")
 tile_set = SubResource("TileSet_xxw0v")
 
-[node name="Hole" parent="." instance=ExtResource("1_kg31f")]
-position = Vector2(404, 183)
+[node name="Hole" parent="." instance=ExtResource("3_dl4b5")]
+position = Vector2(384, 205)
 
 [node name="UI_HUD" parent="." instance=ExtResource("2_ncjpd")]
 

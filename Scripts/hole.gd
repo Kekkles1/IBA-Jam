@@ -3,6 +3,9 @@ extends CharacterBody2D
 # Sends eaten object's radius (after scale) to the Level
 signal swallowed(eaten_r: float)
 
+# NEW: emitted when a milk item is attempted but rejected
+signal lactose_rejected
+
 @export var can_swallow_milk: bool = false
 @export var follow_speed: float = 18.0
 @export var max_speed: float = 2200.0
@@ -60,6 +63,9 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 	if milk_val != null and bool(milk_val) and not can_swallow_milk:
 		print("lactose intolerant")
 		_play_sfx(reject_sfx, 0.95, 1.05)  # optional reject sound
+
+		# NEW: tell the level that lactose was attempted
+		lactose_rejected.emit()
 		return
 
 	# Get hole radius (circle radius * scale)
@@ -100,6 +106,13 @@ func _play_sfx(player: AudioStreamPlayer2D, pitch_min: float, pitch_max: float) 
 
 	player.pitch_scale = randf_range(pitch_min, pitch_max)
 	player.play()
+
+# Optional helper (Level2 will call it) - safe even if reject_sfx is missing
+func wait_for_reject_sfx() -> void:
+	if reject_sfx == null:
+		return
+	if reject_sfx.playing:
+		await reject_sfx.finished
 
 func _grow_after_swallow(eaten_r: float, hole_r: float) -> void:
 	# How "big" was the eaten object relative to the hole (0..1)

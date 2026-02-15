@@ -1,10 +1,11 @@
 extends Node2D
 
 @onready var hole: Node = $Hole
-@onready var hud: CanvasLayer = $UI_HUD   # <-- change to $UI_HUD if that's your node name
+@onready var hud: CanvasLayer = $UI_HUD
 
 var total_safe_size: float = 0.0
 var eaten_safe_size: float = 0.0
+var ending := false
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -19,9 +20,15 @@ func _ready() -> void:
 	# hole emits swallowed(eaten_r: float)
 	hole.swallowed.connect(_on_hole_swallowed)
 
+	# NEW: hole emits lactose_rejected when milk is attempted but blocked
+	hole.lactose_rejected.connect(_on_lactose_rejected)
+
 	hud.time_up.connect(_on_time_up)
 
 func _on_hole_swallowed(eaten_r: float) -> void:
+	if ending:
+		return
+
 	# milk items won't reach here because hole blocks them
 	eaten_safe_size += eaten_r
 
@@ -32,14 +39,33 @@ func _on_hole_swallowed(eaten_r: float) -> void:
 	hud.set_progress01(p)
 	print("eaten_r=", eaten_r, " eaten_safe_size=", eaten_safe_size, " p=", p)
 
-	if p >= 1.0:
+	if p >= 0.999:
 		_on_progress_full()
 
 func _on_time_up() -> void:
-	print("TIME UP")
+	if ending:
+		return
+	ending = true
+
+	get_tree().change_scene_to_file("res://Scenes/TimerLossScreen2.tscn")
+
+func _on_lactose_rejected() -> void:
+	if ending:
+		return
+	ending = true
+
+	# Wait for the reject sound to finish (it plays inside Hole)
+	if hole.has_method("wait_for_reject_sfx"):
+		await hole.call("wait_for_reject_sfx")
+
+	get_tree().change_scene_to_file("res://Scenes/LactoseScreen.tscn")
 
 func _on_progress_full() -> void:
-	print("LEVEL COMPLETE")
+	if ending:
+		return
+	ending = true
+
+	get_tree().change_scene_to_file("res://Scenes/Level2WinScreen.tscn")
 
 # -----------------------
 # Helpers (safe items only)

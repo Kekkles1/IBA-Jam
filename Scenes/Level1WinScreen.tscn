@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://du2ed2fse3dpv"]
+[gd_scene load_steps=3 format=3 uid="uid://du2ed2fse3dpv"]
 
 [ext_resource type="Texture2D" uid="uid://b533fo5k0mbsq" path="res://Assets/character/fat man win.png" id="1_7gs65"]
+[ext_resource type="Script" uid="uid://do4labhaeeu6f" path="res://Scenes/level_1_win_screen.gd" id="1_xdigb"]
 
 [node name="Title Screen" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xdigb")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -50,7 +52,7 @@ Feed me.
 Just… not anythin with milk in it..."
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="NextButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 759.0
 offset_top = 461.0
@@ -60,3 +62,5 @@ theme_override_colors/icon_normal_color = Color(1, 0.11372549, 1, 1)
 theme_override_constants/h_separation = 12
 text = "NEXT"
 icon_alignment = 2
+
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

@@ -1,13 +1,15 @@
-extends Node2D
+extends CharacterBody2D
 
 # send eaten radius + the node that got swallowed
 signal swallowed(eaten_r: float, body: Node2D)
 
 @export var can_swallow_milk: bool = false
-@export var follow_speed: float = 18.0
 
-# Level3 hook (drag your Level3 root here in inspector if you want,
-# otherwise it auto-uses get_parent())
+# movement
+@export var follow_speed: float = 18.0
+@export var max_speed: float = 2200.0
+
+# Level3 hook
 @export var level_logic_path: NodePath
 
 # Growth settings
@@ -19,11 +21,21 @@ signal swallowed(eaten_r: float, body: Node2D)
 @onready var swallow_cs: CollisionShape2D = $SwallowArea/CollisionShape2D
 
 func _physics_process(delta: float) -> void:
+	# Collision-safe movement
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		velocity = Vector2.ZERO
+		move_and_slide()
 		return
 
 	var target: Vector2 = get_global_mouse_position()
-	global_position = global_position.lerp(target, 1.0 - exp(-follow_speed * delta))
+	var to_target: Vector2 = target - global_position
+
+	var desired: Vector2 = to_target * follow_speed
+	if desired.length() > max_speed:
+		desired = desired.normalized() * max_speed
+
+	velocity = desired
+	move_and_slide()
 
 func _on_swallow_area_body_entered(body: Node) -> void:
 	if not body.is_in_group("swalloable"):
@@ -53,9 +65,7 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 		print("tooo big")
 		return
 
-	# -------------------------------
-	# LEVEL 3 PATTERN REJECTION HOOK
-	# -------------------------------
+	# Pattern rejection hook (reject = do NOT swallow)
 	var level_logic: Node = _get_level_logic()
 	if level_logic != null and level_logic.has_method("try_accept_swallow"):
 		var ok: bool = bool(level_logic.call("try_accept_swallow", body_node))
@@ -73,7 +83,6 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 func _get_level_logic() -> Node:
 	if level_logic_path != NodePath(""):
 		return get_node_or_null(level_logic_path)
-	# fallback: parent is the level
 	return get_parent()
 
 func _grow_after_swallow(eaten_r: float, hole_r: float) -> void:

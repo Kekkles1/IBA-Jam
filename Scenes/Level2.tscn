@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=4 uid="uid://fl6sd0x811yp"]
 
 [ext_resource type="PackedScene" uid="uid://8mv8tsf1od43" path="res://Scenes/Hole.tscn" id="1_0plju"]
-[ext_resource type="Script" uid="uid://byym2jj01o8wb" path="res://Scripts/level2.gd" id="1_ms0wi"]
+[ext_resource type="Script" uid="uid://ddt4jgt3etcl6" path="res://Scripts/level2.gd" id="1_ms0wi"]
 [ext_resource type="Texture2D" uid="uid://bx0tckrn8x4ik" path="res://Assets/TileSet/kitchen_v1.png" id="2_ejprb"]
 [ext_resource type="PackedScene" uid="uid://bomulcvktdix6" path="res://Scenes/UI_HUD.tscn" id="2_ms0wi"]
 [ext_resource type="PackedScene" uid="uid://ffw05b4xgacs" path="res://Scenes/Swalloable.tscn" id="4_70df5"]

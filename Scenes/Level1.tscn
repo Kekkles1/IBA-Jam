@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=4 uid="uid://cv46w1wvr652b"]
 
-[ext_resource type="Script" uid="uid://cmcwxp2wl4kpq" path="res://Scripts/level1.gd" id="1_jghel"]
+[ext_resource type="Script" uid="uid://iycimmrpjwu2" path="res://Scripts/level1.gd" id="1_jghel"]
 [ext_resource type="PackedScene" uid="uid://8mv8tsf1od43" path="res://Scenes/Hole.tscn" id="1_q12u6"]
 [ext_resource type="PackedScene" uid="uid://ffw05b4xgacs" path="res://Scenes/Swalloable.tscn" id="2_joc8x"]
 [ext_resource type="PackedScene" uid="uid://bomulcvktdix6" path="res://Scenes/UI_HUD.tscn" id="3_joc8x"]
@@ -1492,12 +1492,12 @@ position = Vector2(258, 200)
 level_texture = ExtResource("4_ysn8j")
 
 [node name="UI_HUD" parent="." instance=ExtResource("3_joc8x")]
-start_seconds = 30.0
+start_seconds = 15.0
 
 [node name="Swalloable2" parent="." instance=ExtResource("2_joc8x")]
 position = Vector2(392, 88)
 level_texture = ExtResource("6_6ll4n")
-collision_radius = 40.0
+collision_radius = 50.0
 
 [node name="Swalloable3" parent="." instance=ExtResource("2_joc8x")]
 level_texture = ExtResource("7_kylad")

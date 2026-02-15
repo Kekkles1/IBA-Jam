@@ -8,9 +8,10 @@ var total_size: float = 0.0
 var eaten_size: float = 0.0
 
 func _ready() -> void:
-	bgm.volume_db = -15   # tweak
+	bgm.volume_db = -15
 	bgm.play()
-	
+
+	# wait 1 frame so everything is in the tree (safe for counting)
 	await get_tree().process_frame
 
 	total_size = _sum_all_swallowable_radii(self)
@@ -20,9 +21,10 @@ func _ready() -> void:
 
 	hud.set_progress01(0.0)
 
-	# NOTE: now the signal sends eaten_r (float)
+	# Hole emits swallowed(eaten_r: float)
 	hole.swallowed.connect(_on_hole_swallowed)
 
+	# HUD emits time_up
 	hud.time_up.connect(_on_time_up)
 
 func _on_hole_swallowed(eaten_r: float) -> void:
@@ -35,14 +37,22 @@ func _on_hole_swallowed(eaten_r: float) -> void:
 	hud.set_progress01(p)
 	print("eaten_r=", eaten_r, " eaten_size=", eaten_size, " p=", p)
 
-	if p >= 1.0:
+	# clamp edge cases (floating point)
+	if p >= 0.999:
 		_on_progress_full()
 
 func _on_time_up() -> void:
-	print("TIME UP")
+	# stop audio cleanly (optional)
+	if is_instance_valid(bgm):
+		bgm.stop()
+
+	get_tree().change_scene_to_file("res://Scenes/TimerLossScreen.tscn")
 
 func _on_progress_full() -> void:
-	print("LEVEL COMPLETE")
+	if is_instance_valid(bgm):
+		bgm.stop()
+
+	get_tree().change_scene_to_file("res://Scenes/Level1WinScreen.tscn")
 
 # ---- helpers ----
 
