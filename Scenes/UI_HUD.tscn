@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bomulcvktdix6"]
+[gd_scene load_steps=5 format=3 uid="uid://bomulcvktdix6"]
 
-[ext_resource type="Script" uid="uid://bu02eemcjhmnu" path="res://Scripts/hud.gd" id="1_6gdyr"]
+[ext_resource type="Script" uid="uid://c5fy03i5k36oy" path="res://Scripts/hud.gd" id="1_6gdyr"]
 
 [sub_resource type="Theme" id="Theme_6gdyr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gdyr"]
+bg_color = Color(0.69803923, 0.74509805, 0.70980394, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyqqr"]
+bg_color = Color(0, 0.627451, 0.37254903, 0.8)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_6gdyr")
@@ -45,6 +51,9 @@ offset_bottom = -35.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = SubResource("Theme_6gdyr")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_6gdyr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kyqqr")
 rounded = true
 fill_mode = 3

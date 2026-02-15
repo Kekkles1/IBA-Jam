@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2mu1wtqem8ie" path="res://Scripts/hole_level3.gd" id="1_vt0w3"]
 [ext_resource type="Texture2D" uid="uid://wfsdxyb5ms3j" path="res://Assets/hole.png" id="2_hlqdb"]
 [ext_resource type="AudioStream" uid="uid://dhbgaxeteuea7" path="res://Assets/Sounds/swallow.mp3" id="3_hlqdb"]
-[ext_resource type="AudioStream" uid="uid://6js3x4ejtull" path="res://Assets/Sounds/spit.mp3" id="4_gxgdh"]
+[ext_resource type="AudioStream" uid="uid://ejf01qhjm4q8" path="res://Assets/Sounds/new_spit.wav" id="4_gxgdh"]
 [ext_resource type="AudioStream" uid="uid://2vihsjf5tal3" path="res://Assets/Sounds/funny_cartoon.mp3" id="5_1aiol"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6w688"]

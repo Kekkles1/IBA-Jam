@@ -921,7 +921,7 @@ tile_set = SubResource("TileSet_ycmr1")
 position = Vector2(471, 220)
 
 [node name="UI_HUD" parent="." instance=ExtResource("2_ms0wi")]
-start_seconds = 30.0
+start_seconds = 15.0
 
 [node name="Swalloable" parent="." instance=ExtResource("4_70df5")]
 position = Vector2(-38, 15)

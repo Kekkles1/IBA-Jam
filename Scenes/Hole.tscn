@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://trxu30ip7hes" path="res://Scripts/hole.gd" id="1_snr8g"]
 [ext_resource type="Texture2D" uid="uid://wfsdxyb5ms3j" path="res://Assets/hole.png" id="2_6w688"]
 [ext_resource type="AudioStream" uid="uid://dhbgaxeteuea7" path="res://Assets/Sounds/swallow.mp3" id="3_6w688"]
-[ext_resource type="AudioStream" uid="uid://6js3x4ejtull" path="res://Assets/Sounds/spit.mp3" id="4_10x25"]
+[ext_resource type="AudioStream" uid="uid://ejf01qhjm4q8" path="res://Assets/Sounds/new_spit.wav" id="4_ailky"]
 [ext_resource type="AudioStream" uid="uid://2vihsjf5tal3" path="res://Assets/Sounds/funny_cartoon.mp3" id="5_ailky"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6w688"]
@@ -37,7 +37,7 @@ shape = SubResource("CircleShape2D_snr8g")
 stream = ExtResource("3_6w688")
 
 [node name="RejectSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_10x25")
+stream = ExtResource("4_ailky")
 
 [node name="TooBigSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_ailky")
