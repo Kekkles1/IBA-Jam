@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcj6ch40negyl"]
+[gd_scene load_steps=3 format=3 uid="uid://bcj6ch40negyl"]
 
+[ext_resource type="Script" uid="uid://ckg7kq6rudr6o" path="res://Scenes/level_3_win_screen.gd" id="1_nx06x"]
 [ext_resource type="Texture2D" uid="uid://b533fo5k0mbsq" path="res://Assets/character/fat man win.png" id="1_uo1sf"]
 
 [node name="Title Screen" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_nx06x")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -41,7 +43,7 @@ text = "BANGER!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="NextButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 759.0
 offset_top = 461.0

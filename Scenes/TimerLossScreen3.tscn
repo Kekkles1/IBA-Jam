@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://70u0fuqequoo"]
+[gd_scene load_steps=3 format=3 uid="uid://70u0fuqequoo"]
 
 [ext_resource type="Texture2D" uid="uid://cumgf2ix0in18" path="res://Assets/character/fat man timer loss.png" id="1_aeyvf"]
+[ext_resource type="Script" uid="uid://d0u2vxlae7rff" path="res://Scenes/timer_loss_screen_3.gd" id="1_rvcw5"]
 
 [node name="Title Screen" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rvcw5")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -40,7 +42,7 @@ theme_override_font_sizes/normal_font_size = 25
 text = "Not Enough Food... :("
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="RetryButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 743.0
 offset_top = 446.0

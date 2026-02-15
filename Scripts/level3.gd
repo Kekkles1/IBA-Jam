@@ -3,11 +3,19 @@ extends Node2D
 @onready var hole: Node = $Hole   # (this must be Hole_Level3 instance)
 @onready var hud: CanvasLayer = $UI_HUD
 
+# Scene paths (match your folder + filenames)
+@export var lactose_scene_path: String = "res://Scenes/LactoseScreen2.tscn"
+@export var wrong_pattern_scene_path: String = "res://Scenes/SavorySweetScreen.tscn"
+@export var timer_loss_scene_path: String = "res://Scenes/TimerLossScreen3.tscn"
+@export var win_scene_path: String = "res://Scenes/Level3WinScreen.tscn"
+
 var total_safe_size: float = 0.0
 var eaten_safe_size: float = 0.0
 
 # 0: savory, 1: savory, 2: sweet
 var pattern_step: int = 0
+
+var _transitioning: bool = false
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -27,6 +35,8 @@ func try_accept_swallow(body: Node2D) -> bool:
 
 	# milk items are not part of the objective
 	if _has_milk(body):
+		# (Normally Hole handles lactose, but just in case)
+		_go_to(lactose_scene_path)
 		return false
 
 	var savory_val: Variant = body.get("is_savory")
@@ -40,6 +50,8 @@ func try_accept_swallow(body: Node2D) -> bool:
 			ok = not is_savory
 
 	if not ok:
+		# WRONG PATTERN -> SavorySweet screen
+		_go_to(wrong_pattern_scene_path)
 		return false
 
 	# accept + advance pattern
@@ -50,7 +62,9 @@ func try_accept_swallow(body: Node2D) -> bool:
 	return true
 
 func _on_hole_swallowed(eaten_r: float, body: Node2D) -> void:
-	# If we got here, it was accepted + swallowed already.
+	if _transitioning:
+		return
+
 	# Update progress by size.
 	eaten_safe_size += eaten_r
 
@@ -64,10 +78,23 @@ func _on_hole_swallowed(eaten_r: float, body: Node2D) -> void:
 		_on_progress_full()
 
 func _on_time_up() -> void:
-	print("TIME UP")
+	# TIMER LOSS -> TimerLoss screen
+	_go_to(timer_loss_scene_path)
 
 func _on_progress_full() -> void:
-	print("LEVEL COMPLETE")
+	# LEVEL COMPLETE -> Level3Win screen
+	_go_to(win_scene_path)
+
+func _go_to(path: String) -> void:
+	if _transitioning:
+		return
+	_transitioning = true
+	if path == null or path == "":
+		return
+	call_deferred("_do_change_scene", path)
+
+func _do_change_scene(path: String) -> void:
+	get_tree().change_scene_to_file(path)
 
 # ---------------- helpers ----------------
 

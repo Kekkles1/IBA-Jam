@@ -12,6 +12,9 @@ signal swallowed(eaten_r: float, body: Node2D)
 # Level3 hook
 @export var level_logic_path: NodePath
 
+# Scene path for lactose
+@export var lactose_scene_path: String = "res://Scenes/LactoseScreen2.tscn"
+
 # Growth settings
 @export var grow_per_swallow: float = 0.06
 @export var grow_by_eaten_ratio: float = 0.25
@@ -19,6 +22,8 @@ signal swallowed(eaten_r: float, body: Node2D)
 @export var grow_tween_time: float = 0.12
 
 @onready var swallow_cs: CollisionShape2D = $SwallowArea/CollisionShape2D
+
+var _transitioning: bool = false
 
 func _physics_process(delta: float) -> void:
 	# Collision-safe movement
@@ -38,6 +43,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _on_swallow_area_body_entered(body: Node) -> void:
+	if _transitioning:
+		return
 	if not body.is_in_group("swalloable"):
 		return
 	if not (body is Node2D):
@@ -48,7 +55,8 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 	# Milk rule (safe even if missing)
 	var milk_val: Variant = body_node.get("contains_milk")
 	if milk_val != null and bool(milk_val) and not can_swallow_milk:
-		print("lactose intolerant")
+		# LACTOSE -> Lactose screen
+		_go_to_lactose()
 		return
 
 	# Size check
@@ -70,15 +78,24 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 	if level_logic != null and level_logic.has_method("try_accept_swallow"):
 		var ok: bool = bool(level_logic.call("try_accept_swallow", body_node))
 		if not ok:
-			print("REJECTED BY PATTERN")
+			# Level3 will change the scene itself for wrong pattern.
 			return
 
 	# Swallow
 	swallowed.emit(body_r, body_node)
-	print("swallowed (r=", body_r, ")")
-
 	_grow_after_swallow(body_r, hole_r)
 	body_node.queue_free()
+
+func _go_to_lactose() -> void:
+	if _transitioning:
+		return
+	_transitioning = true
+	if lactose_scene_path == null or lactose_scene_path == "":
+		return
+	call_deferred("_do_change_scene", lactose_scene_path)
+
+func _do_change_scene(path: String) -> void:
+	get_tree().change_scene_to_file(path)
 
 func _get_level_logic() -> Node:
 	if level_logic_path != NodePath(""):

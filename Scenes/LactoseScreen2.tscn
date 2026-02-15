@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5p7rqjugqkaj"]
+[gd_scene load_steps=3 format=3 uid="uid://b5p7rqjugqkaj"]
 
+[ext_resource type="Script" uid="uid://cos3bibdks4k0" path="res://Scenes/lactose_screen_2.gd" id="1_a7l0p"]
 [ext_resource type="Texture2D" uid="uid://dao85june36vi" path="res://Assets/character/fat man lactose.png" id="1_oup8t"]
 
 [node name="Title Screen" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_a7l0p")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -41,7 +43,7 @@ text = "F#@K YOU!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="RetryButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 759.0
 offset_top = 461.0
@@ -51,3 +53,5 @@ theme_override_colors/icon_normal_color = Color(1, 0.11372549, 1, 1)
 theme_override_constants/h_separation = 12
 text = "RESTART LEVEL"
 icon_alignment = 2
+
+[connection signal="pressed" from="RetryButton" to="." method="_on_retry_button_pressed"]
