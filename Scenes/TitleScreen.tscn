@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c77sn2qw7vkpi"]
+[gd_scene load_steps=5 format=3 uid="uid://c77sn2qw7vkpi"]
 
 [ext_resource type="Texture2D" uid="uid://c44v2t183bxmu" path="res://Assets/character/fat man main.png" id="1_4um7d"]
-[ext_resource type="Script" uid="uid://dmk6expbm0opb" path="res://Scripts/titlescreen.gd" id="1_vmg2h"]
+[ext_resource type="Script" uid="uid://bg25lbgcqhqlx" path="res://Scripts/titlescreen.gd" id="1_vmg2h"]
+[ext_resource type="AudioStream" uid="uid://b81b8loq7nk43" path="res://Assets/Sounds/TitleMusic.wav" id="3_8l4an"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d1hhm"]
 font_size = 100
@@ -69,5 +70,8 @@ theme_override_colors/icon_normal_color = Color(1, 0.11372549, 1, 1)
 theme_override_constants/h_separation = 12
 text = "PLAY"
 icon_alignment = 2
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8l4an")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

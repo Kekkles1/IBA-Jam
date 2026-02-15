@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0r1bnk02id62"]
 
-[ext_resource type="Script" uid="uid://bas5p2dll3qpo" path="res://Scenes/start_screen.gd" id="1_0on6r"]
+[ext_resource type="Script" uid="uid://1lj0v3c6vxa1" path="res://Scenes/start_screen.gd" id="1_0on6r"]
 [ext_resource type="Texture2D" uid="uid://c1mhbdw6jx2ka" path="res://Assets/character/fat man hole.png" id="1_ko4ly"]
 
 [node name="Title Screen" type="Control"]
