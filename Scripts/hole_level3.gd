@@ -1,17 +1,17 @@
-extends CharacterBody2D
+extends Node2D
 
 # send eaten radius + the node that got swallowed
 signal swallowed(eaten_r: float, body: Node2D)
 
+# SFX players (RejectSFX / TooBigSFX are optional)
 @onready var swallow_sfx: AudioStreamPlayer2D = $SwallowSFX
 @onready var reject_sfx: AudioStreamPlayer2D = get_node_or_null("RejectSFX") as AudioStreamPlayer2D
 @onready var too_big_sfx: AudioStreamPlayer2D = get_node_or_null("TooBigSFX") as AudioStreamPlayer2D
 
 @export var can_swallow_milk: bool = false
 
-# movement
+# movement (Node2D follow)
 @export var follow_speed: float = 18.0
-@export var max_speed: float = 2200.0
 
 # Level3 hook
 @export var level_logic_path: NodePath
@@ -34,34 +34,26 @@ func _ready() -> void:
 		swallow_sfx.volume_db = 15
 
 	if reject_sfx:
-		reject_sfx.volume_db = 6
+		reject_sfx.volume_db = 10
 
 	if too_big_sfx:
 		too_big_sfx.volume_db = 3
 
 func _physics_process(delta: float) -> void:
-	# Collision-safe movement
+	# Node2D follow movement (no physics collision blocking)
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		velocity = Vector2.ZERO
-		move_and_slide()
 		return
 
 	var target: Vector2 = get_global_mouse_position()
-	var to_target: Vector2 = target - global_position
-
-	var desired: Vector2 = to_target * follow_speed
-	if desired.length() > max_speed:
-		desired = desired.normalized() * max_speed
-
-	velocity = desired
-	move_and_slide()
+	var w: float = 1.0 - exp(-follow_speed * delta)
+	global_position = global_position.lerp(target, w)
 
 func _on_swallow_area_body_entered(body: Node) -> void:
 	if _transitioning:
 		return
-	if not body.is_in_group("swalloable"):
-		return
 	if not (body is Node2D):
+		return
+	if not body.is_in_group("swalloable"):
 		return
 
 	var body_node: Node2D = body as Node2D
@@ -69,7 +61,6 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 	# Milk rule (safe even if missing)
 	var milk_val: Variant = body_node.get("contains_milk")
 	if milk_val != null and bool(milk_val) and not can_swallow_milk:
-		# LACTOSE -> Lactose screen
 		_go_to_lactose()
 		return
 
@@ -84,7 +75,8 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 		return
 
 	if body_r > hole_r:
-		print("tooo big")
+		if too_big_sfx:
+			too_big_sfx.play()
 		return
 
 	# Pattern rejection hook (reject = do NOT swallow)
@@ -92,10 +84,14 @@ func _on_swallow_area_body_entered(body: Node) -> void:
 	if level_logic != null and level_logic.has_method("try_accept_swallow"):
 		var ok: bool = bool(level_logic.call("try_accept_swallow", body_node))
 		if not ok:
-			# Level3 will change the scene itself for wrong pattern.
+			if reject_sfx:
+				reject_sfx.play()
 			return
 
 	# Swallow
+	if swallow_sfx:
+		swallow_sfx.play()
+
 	swallowed.emit(body_r, body_node)
 	_grow_after_swallow(body_r, hole_r)
 	body_node.queue_free()
