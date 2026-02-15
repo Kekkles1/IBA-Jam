@@ -1,10 +1,11 @@
-extends Node2D
+extends CharacterBody2D
 
-# Now sends the eaten object's radius (after scale) to the Level
+# Sends eaten object's radius (after scale) to the Level
 signal swallowed(eaten_r: float)
 
 @export var can_swallow_milk: bool = false
 @export var follow_speed: float = 18.0
+@export var max_speed: float = 2200.0
 
 # Growth settings
 @export var grow_per_swallow: float = 0.06      # +6% scale each swallow (base)
@@ -15,11 +16,22 @@ signal swallowed(eaten_r: float)
 @onready var swallow_cs: CollisionShape2D = $SwallowArea/CollisionShape2D
 
 func _physics_process(delta: float) -> void:
+	# Collision-safe movement (TileMap can block CharacterBody2D)
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		velocity = Vector2.ZERO
+		move_and_slide()
 		return
 
 	var target: Vector2 = get_global_mouse_position()
-	global_position = global_position.lerp(target, 1.0 - exp(-follow_speed * delta))
+	var to_target: Vector2 = target - global_position
+
+	# Smooth-ish chase but still collision aware
+	var desired: Vector2 = to_target * follow_speed
+	if desired.length() > max_speed:
+		desired = desired.normalized() * max_speed
+
+	velocity = desired
+	move_and_slide()
 
 func _on_swallow_area_body_entered(body: Node) -> void:
 	# Only swallow things in the swalloable group

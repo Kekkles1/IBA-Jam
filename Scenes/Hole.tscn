@@ -1,26 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://8mv8tsf1od43"]
+[gd_scene load_steps=5 format=3 uid="uid://8mv8tsf1od43"]
 
 [ext_resource type="Script" uid="uid://trxu30ip7hes" path="res://Scripts/hole.gd" id="1_snr8g"]
 [ext_resource type="Texture2D" uid="uid://wfsdxyb5ms3j" path="res://Assets/hole.png" id="2_6w688"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6w688"]
+radius = 35.014282
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_snr8g"]
 radius = 43.046486
 
-[node name="Hole" type="Node2D"]
+[node name="Hole" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_snr8g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6w688")
 
 [node name="HoleSprite" type="Sprite2D" parent="."]
 z_index = 100
-position = Vector2(274.5, 329.5)
+position = Vector2(-0.5, -3.5000033)
 scale = Vector2(1.2656248, 1.4218749)
 texture = ExtResource("2_6w688")
 
 [node name="SwallowArea" type="Area2D" parent="."]
-position = Vector2(275, 332)
+position = Vector2(-3.0517578e-05, -1.0000343)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwallowArea"]
-position = Vector2(0, 3)
+position = Vector2(3.0517578e-05, 1.0000305)
 shape = SubResource("CircleShape2D_snr8g")
 
 [connection signal="body_entered" from="SwallowArea" to="." method="_on_swallow_area_body_entered"]
-[connection signal="body_exited" from="SwallowArea" to="." method="_on_swallow_area_body_exited"]
