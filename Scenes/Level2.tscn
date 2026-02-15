@@ -1,15 +1,17 @@
-[gd_scene load_steps=17 format=4 uid="uid://fl6sd0x811yp"]
+[gd_scene load_steps=19 format=4 uid="uid://fl6sd0x811yp"]
 
 [ext_resource type="PackedScene" uid="uid://8mv8tsf1od43" path="res://Scenes/Hole.tscn" id="1_0plju"]
-[ext_resource type="Script" uid="uid://ddt4jgt3etcl6" path="res://Scripts/level2.gd" id="1_ms0wi"]
+[ext_resource type="Script" uid="uid://byym2jj01o8wb" path="res://Scripts/level2.gd" id="1_ms0wi"]
 [ext_resource type="Texture2D" uid="uid://bx0tckrn8x4ik" path="res://Assets/TileSet/kitchen_v1.png" id="2_ejprb"]
 [ext_resource type="PackedScene" uid="uid://bomulcvktdix6" path="res://Scenes/UI_HUD.tscn" id="2_ms0wi"]
 [ext_resource type="PackedScene" uid="uid://ffw05b4xgacs" path="res://Scenes/Swalloable.tscn" id="4_70df5"]
-[ext_resource type="Texture2D" uid="uid://irc3h4vu4lct" path="res://Assets/67_macncheese.png" id="5_ejprb"]
-[ext_resource type="Texture2D" uid="uid://ehab6j4gqyjg" path="res://Assets/69_meatball.png" id="6_au75x"]
-[ext_resource type="Texture2D" uid="uid://bmwwu0yg5yutb" path="res://Assets/45_frenchfries_dish.png" id="7_62f1r"]
+[ext_resource type="Texture2D" uid="uid://bld6irhy0bh3i" path="res://Assets/95_steak.png" id="6_62f1r"]
+[ext_resource type="Texture2D" uid="uid://86kxed7d2l1y" path="res://Assets/91_strawberrycake_dish.png" id="7_1je60"]
 [ext_resource type="Texture2D" uid="uid://dfu2q37n1h1xl" path="res://Assets/23_cheesecake_dish.png" id="8_1je60"]
-[ext_resource type="Texture2D" uid="uid://dwhwwg86rpcoa" path="res://Assets/59_jelly.png" id="9_ycmr1"]
+[ext_resource type="Texture2D" uid="uid://cxs2ricpxbm14" path="res://Assets/101_waffle.png" id="8_ycmr1"]
+[ext_resource type="Texture2D" uid="uid://clsaefpmc12a5" path="res://Assets/98_sushi_dish.png" id="10_2jwna"]
+[ext_resource type="Texture2D" uid="uid://bkcta6a3487ua" path="res://Assets/14_bacon_dish.png" id="11_sgc6j"]
+[ext_resource type="Texture2D" uid="uid://saiskftxny3o" path="res://Assets/88_salmon.png" id="12_xx40l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_au75x"]
 texture = ExtResource("2_ejprb")
@@ -907,7 +909,7 @@ tile_map_data = PackedByteArray("AAAdAAEAAAAPAA8AAFAdAAIAAAAQAA8AAFAdAAMAAAAQAA8
 tile_set = SubResource("TileSet_62f1r")
 
 [node name="ObjectTileMap" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAAAAAALAAIAAAAAAAEAAAALAAMAAAABAAAAAAAIAAIAAAABAAEAAAAIAAMAAAACAAAAAAAHAAIAAAADAAAAAAAHAAIAAAAEAAAAAAAHAAIAAAAFAAAAAAAHAAIAAAACAAEAAAAHAAMAAAADAAEAAAAHAAMAAAAEAAEAAAAHAAMAAAAFAAEAAAAHAAMAAAABAAcAAAAGAAgAAAACAAcAAAAHAAgAAAADAAcAAAAHAAgAAAAEAAcAAAAHAAgAAAAFAAcAAAAHAAgAAAABAAgAAAAGAAQAAAACAAgAAAAGAAQAAAADAAgAAAAGAAQAAAAEAAgAAAAGAAQAAAAFAAgAAAAGAAQAAAAGAAcAAAAHAAgAAAAGAAgAAAAHAAQAAAAHAAcAAAAIAAYAAAAHAAgAAAAIAAcAAAAHAAkAAAALAAkAAAAHAAoAAAALAAYAAAAHAAsAAAAJAAgAAAAHAAwAAAAJAAcAAFAGAAwAAAAJAAgAAFAFAAwAAAAJAAgAAFAEAAwAAAAJAAgAAFATAAAAAAAGAAYAAAAVAAAAAAAHAAYAAAATAAEAAAAGAAcAAAAVAAEAAAAHAAcAAAAHAA8AAAACABAAAAAXAAYAAAACABAAAAAKAAUAAAACABAAAAAWAAwAAAACABAAAAASAA8AAAAHAAgAAAATAA8AAAAHAAgAAAAUAA8AAAAHAAgAAAAVAA8AAAAHAAgAAAAWAA8AAAAHAAgAAAAXAA8AAAAHAAgAAAAYAA8AAAAHAAgAAAAZAA8AAAAHAAgAAAAaAA8AAAAHAAgAAAAbAA8AAAAHAAgAAAARAA8AAAALAAYAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAALAAIAAAAAAAEAAAALAAMAAAABAAAAAAAIAAIAAAABAAEAAAAIAAMAAAACAAAAAAAHAAIAAAADAAAAAAAHAAIAAAAEAAAAAAAHAAIAAAAFAAAAAAAHAAIAAAACAAEAAAAHAAMAAAADAAEAAAAHAAMAAAAEAAEAAAAHAAMAAAAFAAEAAAAHAAMAAAATAAAAAAAGAAYAAAAVAAAAAAAHAAYAAAATAAEAAAAGAAcAAAAVAAEAAAAHAAcAAAAHAA8AAAACABAAAAAXAAYAAAACABAAAAAKAAUAAAACABAAAAAWAAwAAAACABAAAAASAA8AAAAHAAgAAAATAA8AAAAHAAgAAAAUAA8AAAAHAAgAAAAVAA8AAAAHAAgAAAAWAA8AAAAHAAgAAAAXAA8AAAAHAAgAAAAYAA8AAAAHAAgAAAAZAA8AAAAHAAgAAAAaAA8AAAAHAAgAAAAbAA8AAAAHAAgAAAARAA8AAAALAAYAAAABAAYAAAAHAAgAAAACAAYAAAAHAAgAAAADAAYAAAAHAAgAAAAEAAYAAAAHAAgAAAAFAAYAAAAHAAgAAAAGAAYAAAAHAAgAAAAHAAYAAAAIAAYAAAAHAAcAAAAIAAcAAAAHAAgAAAAJAAgAAAAHAAkAAAAJAAgAAAAHAAoAAAAJAAgAAAAHAAsAAAAJAAgAAAABAAcAAAAGAAQAAAACAAcAAAAGAAQAAAADAAcAAAAGAAQAAAAEAAcAAAAGAAQAAAAFAAcAAAAGAAQAAAAGAAcAAAAGAAQAAAA=")
 tile_set = SubResource("TileSet_1je60")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -920,27 +922,37 @@ position = Vector2(471, 220)
 [node name="UI_HUD" parent="." instance=ExtResource("2_ms0wi")]
 
 [node name="Swalloable" parent="." instance=ExtResource("4_70df5")]
-contains_milk = true
-level_texture = ExtResource("5_ejprb")
-collision_radius = 35.0
+position = Vector2(-38, 15)
+level_texture = ExtResource("6_62f1r")
+collision_radius = 45.0
 
 [node name="Swalloable2" parent="." instance=ExtResource("4_70df5")]
 position = Vector2(521, 248)
-level_texture = ExtResource("6_au75x")
+contains_milk = true
+level_texture = ExtResource("7_1je60")
 collision_radius = 30.0
 
 [node name="Swalloable3" parent="." instance=ExtResource("4_70df5")]
-position = Vector2(455, 9)
-level_texture = ExtResource("7_62f1r")
+position = Vector2(396, 6)
+contains_milk = true
+level_texture = ExtResource("8_ycmr1")
 collision_radius = 50.0
 
 [node name="Swalloable4" parent="." instance=ExtResource("4_70df5")]
-position = Vector2(223, 372)
+position = Vector2(288, 357)
 contains_milk = true
 level_texture = ExtResource("8_1je60")
-collision_radius = 30.0
+collision_radius = 42.0
 
 [node name="Swalloable5" parent="." instance=ExtResource("4_70df5")]
-position = Vector2(-48, 237)
-level_texture = ExtResource("9_ycmr1")
-collision_radius = 45.0
+position = Vector2(-28, 211)
+level_texture = ExtResource("10_2jwna")
+
+[node name="Swalloable6" parent="." instance=ExtResource("4_70df5")]
+position = Vector2(691, 337)
+level_texture = ExtResource("11_sgc6j")
+
+[node name="Swalloable7" parent="." instance=ExtResource("4_70df5")]
+position = Vector2(656, 6)
+level_texture = ExtResource("12_xx40l")
+collision_radius = 30.0
