@@ -3,7 +3,6 @@ extends Node2D
 @onready var hole: Node = $Hole   # (this must be Hole_Level3 instance)
 @onready var hud: CanvasLayer = $UI_HUD
 
-# Scene paths (match your folder + filenames)
 @export var lactose_scene_path: String = "res://Scenes/LactoseScreen2.tscn"
 @export var wrong_pattern_scene_path: String = "res://Scenes/SavorySweetScreen.tscn"
 @export var timer_loss_scene_path: String = "res://Scenes/TimerLossScreen3.tscn"
@@ -14,7 +13,6 @@ extends Node2D
 var total_safe_size: float = 0.0
 var eaten_safe_size: float = 0.0
 
-# 0: savory, 1: savory, 2: sweet
 var pattern_step: int = 0
 
 var _transitioning: bool = false
@@ -31,16 +29,12 @@ func _ready() -> void:
 
 	hud.set_progress01(0.0)
 
-	# hole emits swallowed(eaten_r, body)
 	hole.swallowed.connect(_on_hole_swallowed)
 	hud.time_up.connect(_on_time_up)
 
 func try_accept_swallow(body: Node2D) -> bool:
-	# only here in Level3; Hole_Level3 calls this BEFORE swallowing
 
-	# milk items are not part of the objective
 	if _has_milk(body):
-		# (Normally Hole handles lactose, but just in case)
 		_go_to(lactose_scene_path)
 		return false
 
@@ -55,11 +49,9 @@ func try_accept_swallow(body: Node2D) -> bool:
 			ok = not is_savory
 
 	if not ok:
-		# WRONG PATTERN -> SavorySweet screen
 		_go_to(wrong_pattern_scene_path)
 		return false
 
-	# accept + advance pattern
 	pattern_step += 1
 	if pattern_step > 2:
 		pattern_step = 0
@@ -70,7 +62,6 @@ func _on_hole_swallowed(eaten_r: float, body: Node2D) -> void:
 	if _transitioning:
 		return
 
-	# Update progress by size.
 	eaten_safe_size += eaten_r
 
 	var p := 0.0
@@ -83,11 +74,9 @@ func _on_hole_swallowed(eaten_r: float, body: Node2D) -> void:
 		_on_progress_full()
 
 func _on_time_up() -> void:
-	# TIMER LOSS -> TimerLoss screen
 	_go_to(timer_loss_scene_path)
 
 func _on_progress_full() -> void:
-	# LEVEL COMPLETE -> Level3Win screen
 	_go_to(win_scene_path)
 
 func _go_to(path: String) -> void:
@@ -101,7 +90,6 @@ func _go_to(path: String) -> void:
 func _do_change_scene(path: String) -> void:
 	get_tree().change_scene_to_file(path)
 
-# ---------------- helpers ----------------
 
 func _sum_safe_sizes(node: Node) -> float:
 	var sum := 0.0

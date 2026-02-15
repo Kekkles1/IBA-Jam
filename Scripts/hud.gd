@@ -8,13 +8,11 @@ extends CanvasLayer
 var time_left: float
 
 signal time_up
-#use this signal as time up
 
 func _ready() -> void:
 	time_left = start_seconds
 	_update_timer_label()
 
-	# progress defaults
 	progress_bar.min_value = 0.0
 	progress_bar.max_value = 100.0
 	progress_bar.value = 0.0
@@ -41,11 +39,6 @@ func reset_timer(new_seconds: float = -1.0) -> void:
 	time_left = (new_seconds if new_seconds >= 0.0 else start_seconds)
 	_update_timer_label()
 
-# -----------------------------
-# PROGRESS BAR (separate system)
-# -----------------------------
-
-# If you want to set progress as 0..1 (percent)
 func set_progress01(p: float) -> void:
 	p = clamp(p, 0.0, 1.0)
 
@@ -54,7 +47,6 @@ func set_progress01(p: float) -> void:
 	progress_bar.value = p * 100.0
 
 
-# If you want "current out of total" (e.g., swallowed / total)
 func set_progress(current: float, total: float) -> void:
 	if total <= 0.0:
 		progress_bar.min_value = 0.0

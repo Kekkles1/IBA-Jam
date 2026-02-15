@@ -21,10 +21,8 @@ func _ready() -> void:
 
 	hud.set_progress01(0.0)
 
-	# hole emits swallowed(eaten_r: float)
 	hole.swallowed.connect(_on_hole_swallowed)
 
-	# NEW: hole emits lactose_rejected when milk is attempted but blocked
 	hole.lactose_rejected.connect(_on_lactose_rejected)
 
 	hud.time_up.connect(_on_time_up)
@@ -33,7 +31,6 @@ func _on_hole_swallowed(eaten_r: float) -> void:
 	if ending:
 		return
 
-	# milk items won't reach here because hole blocks them
 	eaten_safe_size += eaten_r
 
 	var p := 0.0
@@ -58,7 +55,6 @@ func _on_lactose_rejected() -> void:
 		return
 	ending = true
 
-	# Wait for the reject sound to finish (it plays inside Hole)
 	if hole.has_method("wait_for_reject_sfx"):
 		await hole.call("wait_for_reject_sfx")
 
@@ -71,9 +67,6 @@ func _on_progress_full() -> void:
 
 	get_tree().change_scene_to_file("res://Scenes/Level2WinScreen.tscn")
 
-# -----------------------
-# Helpers (safe items only)
-# -----------------------
 
 func _sum_safe_sizes(node: Node) -> float:
 	var sum := 0.0

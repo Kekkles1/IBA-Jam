@@ -15,7 +15,6 @@ func _ready() -> void:
 
 	_apply_collision_and_visual()
 
-# Call this when you tweak values in the editor too
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_EDITOR_PRE_SAVE:
 		_apply_collision_and_visual()
@@ -35,14 +34,11 @@ func _sync_sprite_to_circle(radius: float) -> void:
 	if sprite.texture == null:
 		return
 
-	# texture size in pixels
 	var tex_size: Vector2 = sprite.texture.get_size()
 	if tex_size.x <= 0.0 or tex_size.y <= 0.0:
 		return
 
-	# assume the sprite image is roughly a circle that fills the texture
 	var tex_radius: float = min(tex_size.x, tex_size.y) * 0.5
 
-	# scale sprite so its visual radius equals collision radius
 	var s: float = radius / tex_radius
 	sprite.scale = Vector2(s, s)

@@ -11,7 +11,6 @@ func _ready() -> void:
 	bgm.volume_db = -15
 	bgm.play()
 
-	# wait 1 frame so everything is in the tree (safe for counting)
 	await get_tree().process_frame
 
 	total_size = _sum_all_swallowable_radii(self)
@@ -21,10 +20,8 @@ func _ready() -> void:
 
 	hud.set_progress01(0.0)
 
-	# Hole emits swallowed(eaten_r: float)
 	hole.swallowed.connect(_on_hole_swallowed)
 
-	# HUD emits time_up
 	hud.time_up.connect(_on_time_up)
 
 func _on_hole_swallowed(eaten_r: float) -> void:
@@ -37,12 +34,10 @@ func _on_hole_swallowed(eaten_r: float) -> void:
 	hud.set_progress01(p)
 	print("eaten_r=", eaten_r, " eaten_size=", eaten_size, " p=", p)
 
-	# clamp edge cases (floating point)
 	if p >= 0.999:
 		_on_progress_full()
 
 func _on_time_up() -> void:
-	# stop audio cleanly (optional)
 	if is_instance_valid(bgm):
 		bgm.stop()
 
@@ -54,12 +49,10 @@ func _on_progress_full() -> void:
 
 	get_tree().change_scene_to_file("res://Scenes/Level1WinScreen.tscn")
 
-# ---- helpers ----
 
 func _sum_all_swallowable_radii(node: Node) -> float:
 	var sum := 0.0
 
-	# only count swallowables in THIS level tree
 	if node.is_in_group("swalloable"):
 		var r := _get_circle_radius_from_node(node)
 		if r > 0.0:
