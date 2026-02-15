@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://c77sn2qw7vkpi"]
+
+[ext_resource type="Texture2D" uid="uid://c44v2t183bxmu" path="res://Assets/character/fat man main.png" id="1_4um7d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d1hhm"]
+font_size = 100
+outline_size = 13
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.29411766)
+shadow_offset = Vector2(-8, 1)
+
+[node name="Title Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftImage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 11.0
+offset_right = 408.0
+offset_bottom = 523.0
+texture = ExtResource("1_4um7d")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 137.0
+offset_right = 932.0
+offset_bottom = 274.0
+text = "WARPED"
+label_settings = SubResource("LabelSettings_d1hhm")
+horizontal_alignment = 1
+
+[node name="Dialogue" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 271.0
+offset_right = 926.0
+offset_bottom = 320.0
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 25
+text = "A hole-some diet of stolen delights"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 339.0
+offset_right = 762.0
+offset_bottom = 386.0
+theme_override_colors/icon_normal_color = Color(1, 0.11372549, 1, 1)
+theme_override_constants/h_separation = 12
+text = "PLAY"
+icon_alignment = 2

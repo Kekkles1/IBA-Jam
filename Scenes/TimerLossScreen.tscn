@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://by5rifdqtuqjb"]
+
+[ext_resource type="Texture2D" uid="uid://cumgf2ix0in18" path="res://Assets/character/fat man timer loss.png" id="1_6ed4l"]
+
+[node name="Title Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftImage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 9.0
+offset_right = 465.0
+offset_bottom = 546.0
+texture = ExtResource("1_6ed4l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Dialogue" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 241.0
+offset_right = 931.0
+offset_bottom = 290.0
+size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 25
+text = "Not Enough Food... :("
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 743.0
+offset_top = 446.0
+offset_right = 900.0
+offset_bottom = 493.0
+theme_override_colors/icon_normal_color = Color(1, 0.11372549, 1, 1)
+theme_override_constants/h_separation = 12
+text = "RESTART LEVEL"
+icon_alignment = 2
