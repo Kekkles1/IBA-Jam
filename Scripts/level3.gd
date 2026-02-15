@@ -9,6 +9,8 @@ extends Node2D
 @export var timer_loss_scene_path: String = "res://Scenes/TimerLossScreen3.tscn"
 @export var win_scene_path: String = "res://Scenes/Level3WinScreen.tscn"
 
+@onready var bgm: AudioStreamPlayer = $BGM
+
 var total_safe_size: float = 0.0
 var eaten_safe_size: float = 0.0
 
@@ -18,6 +20,9 @@ var pattern_step: int = 0
 var _transitioning: bool = false
 
 func _ready() -> void:
+	bgm.volume_db = -15
+	bgm.play()
+	
 	await get_tree().process_frame
 
 	total_safe_size = _sum_safe_sizes(self)

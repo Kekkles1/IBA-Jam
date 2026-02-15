@@ -3,6 +3,10 @@ extends CharacterBody2D
 # send eaten radius + the node that got swallowed
 signal swallowed(eaten_r: float, body: Node2D)
 
+@onready var swallow_sfx: AudioStreamPlayer2D = $SwallowSFX
+@onready var reject_sfx: AudioStreamPlayer2D = get_node_or_null("RejectSFX") as AudioStreamPlayer2D
+@onready var too_big_sfx: AudioStreamPlayer2D = get_node_or_null("TooBigSFX") as AudioStreamPlayer2D
+
 @export var can_swallow_milk: bool = false
 
 # movement
@@ -24,6 +28,16 @@ signal swallowed(eaten_r: float, body: Node2D)
 @onready var swallow_cs: CollisionShape2D = $SwallowArea/CollisionShape2D
 
 var _transitioning: bool = false
+
+func _ready() -> void:
+	if swallow_sfx:
+		swallow_sfx.volume_db = 15
+
+	if reject_sfx:
+		reject_sfx.volume_db = 6
+
+	if too_big_sfx:
+		too_big_sfx.volume_db = 3
 
 func _physics_process(delta: float) -> void:
 	# Collision-safe movement

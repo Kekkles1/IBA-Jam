@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcfduohbarevo"]
+[gd_scene load_steps=6 format=3 uid="uid://dcfduohbarevo"]
 
 [ext_resource type="Texture2D" uid="uid://wfsdxyb5ms3j" path="res://Assets/hole.png" id="2_6u0xd"]
+[ext_resource type="AudioStream" uid="uid://dhbgaxeteuea7" path="res://Assets/Sounds/swallow.mp3" id="2_gqrhc"]
+[ext_resource type="AudioStream" uid="uid://6js3x4ejtull" path="res://Assets/Sounds/spit.mp3" id="3_w2q5o"]
+[ext_resource type="AudioStream" uid="uid://2vihsjf5tal3" path="res://Assets/Sounds/funny_cartoon.mp3" id="4_op5ev"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_snr8g"]
 radius = 39.051247
@@ -17,5 +20,14 @@ texture = ExtResource("2_6u0xd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwallowArea"]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_snr8g")
+
+[node name="SwallowSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_gqrhc")
+
+[node name="RejectSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_w2q5o")
+
+[node name="TooBigSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_op5ev")
 
 [connection signal="body_entered" from="SwallowArea" to="." method="_on_swallow_area_body_entered"]

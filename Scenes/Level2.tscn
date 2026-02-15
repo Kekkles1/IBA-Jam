@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://fl6sd0x811yp"]
+[gd_scene load_steps=20 format=4 uid="uid://fl6sd0x811yp"]
 
 [ext_resource type="PackedScene" uid="uid://8mv8tsf1od43" path="res://Scenes/Hole.tscn" id="1_0plju"]
 [ext_resource type="Script" uid="uid://byym2jj01o8wb" path="res://Scripts/level2.gd" id="1_ms0wi"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://clsaefpmc12a5" path="res://Assets/98_sushi_dish.png" id="10_2jwna"]
 [ext_resource type="Texture2D" uid="uid://bkcta6a3487ua" path="res://Assets/14_bacon_dish.png" id="11_sgc6j"]
 [ext_resource type="Texture2D" uid="uid://saiskftxny3o" path="res://Assets/88_salmon.png" id="12_xx40l"]
+[ext_resource type="AudioStream" uid="uid://5bxa7xxaxcqa" path="res://Assets/Sounds/MainSong.wav" id="13_1je60"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_au75x"]
 texture = ExtResource("2_ejprb")
@@ -920,6 +921,7 @@ tile_set = SubResource("TileSet_ycmr1")
 position = Vector2(471, 220)
 
 [node name="UI_HUD" parent="." instance=ExtResource("2_ms0wi")]
+start_seconds = 30.0
 
 [node name="Swalloable" parent="." instance=ExtResource("4_70df5")]
 position = Vector2(-38, 15)
@@ -956,3 +958,6 @@ level_texture = ExtResource("11_sgc6j")
 position = Vector2(656, 6)
 level_texture = ExtResource("12_xx40l")
 collision_radius = 30.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_1je60")
