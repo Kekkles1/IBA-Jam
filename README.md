@@ -1,4 +1,4 @@
-Game made in less than 24 hours for the IBA Game Jam. Two-person team.\
+Game made in less than 24 hours for the IBA Game Jam. It won 2nd prize. Two-person team.\
 Below are some screenshots of the game. 
 <img width="913" height="507" alt="image" src="https://github.com/user-attachments/assets/374cf166-46e7-4377-833c-01a787fc6be3" />
 <img width="923" height="526" alt="image" src="https://github.com/user-attachments/assets/be12f128-c37f-434a-8caf-839446362607" />
